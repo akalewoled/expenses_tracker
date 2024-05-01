@@ -23,4 +23,6 @@ class DeleteCatagoryBloc extends Bloc<DeleteCatagoryEvent, DeleteCatagoryState> 
           emit(DeleteCatagoryFailure());
         } 
       }
+
+      
 }

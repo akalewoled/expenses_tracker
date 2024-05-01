@@ -1,4 +1,5 @@
 import 'package:expense_repository/expense_repository.dart';
+import 'package:expenses_tracker/screens/add_expense/blocs/deleteexpense/deleterxpense_bloc.dart';
 import 'package:expenses_tracker/screens/home/blocs/get_expenses_bloc/get_expenses_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,12 +14,22 @@ class MyAppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Expense Tracker",
       theme: ThemeData(colorScheme: ColorScheme.light(background: Colors.grey.shade100, onBackground: Colors.black, primary: const Color(0xFF00B2E7), secondary: const Color(0xFFE064F7), tertiary: const Color(0xFFFF8D6C), outline: Colors.grey)),
-      home: BlocProvider(
+      home: MultiBlocProvider(
+        providers: [
+             BlocProvider(
         create: (context) => GetExpensesBloc(
           FirebaseExpenseRepo()
-        )..add(GetExpenses()),
+        )..add(GetExpenses())
+        ),
+
+          BlocProvider(
+            create: (context) => DeleteexpenseBloc(FirebaseExpenseRepo()),
+          ),
+        ],
         child: const HomeScreen(),
-      ),
-    );
+      )
+   
+      );
+    
   }
 }

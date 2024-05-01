@@ -6,6 +6,8 @@ import 'dart:math';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expenses_tracker/screens/add_expense/blocs/balance/balance_bloc.dart';
 import 'package:expenses_tracker/screens/home/blocs/get_expenses_bloc/get_expenses_bloc.dart';
+
+import 'package:expenses_tracker/screens/add_expense/blocs/deleteexpense/deleterxpense_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -225,10 +227,12 @@ class MainScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: expenses.length,
                     itemBuilder: (context, int i) {
+                    
                       sum=context.read<TextBloc>().state.sum+expenses[i].amount;
                      TextBloc(context).add(updatesum(sum: sum));
 
                       return Padding(   
+                        
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Container(
                           decoration: BoxDecoration(
@@ -237,62 +241,90 @@ class MainScreen extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Container(
-                                          width: 50,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            color: Color(expenses[i].category.color),
-                                            shape: BoxShape.circle
+                            child: GestureDetector(
+                              onLongPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return AlertDialog(
+                                        title: const Text('do you want to delte this expense?'),
+                                        //content: const Text('Category name must be at least 5 characters long and icon must be selected'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              context.read<DeleteexpenseBloc>().add(DeleteExpense(expenses[i]));
+                                              Navigator.pop(ctx);
+                                            },
+                                            child: const Text('OK'),
+                                          )
+                                        ],
+                                      );
+                                    }
+                                  );
+
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Stack(
+                                  
+                              
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Container(
+                                            width: 50,
+                                            height: 50,
+                                            decoration: BoxDecoration(
+                                              color: Color(expenses[i].category.color),
+                                              shape: BoxShape.circle
+                                            ),
                                           ),
+                                          Image.asset(
+                                            'assets/${expenses[i].category.icon}.png',
+                                            scale: 2,
+                                            color: Colors.white,
+                                            
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Text(
+                                        expenses[i].category.name,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).colorScheme.onBackground,
+                                          fontWeight: FontWeight.w500
+                                          
                                         ),
-                                        Image.asset(
-                                          'assets/${expenses[i].category.icon}.png',
-                                          scale: 2,
-                                          color: Colors.white,
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      expenses[i].category.name,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context).colorScheme.onBackground,
-                                        fontWeight: FontWeight.w500
+                                        
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      " ${expenses[i].amount}.00 Birr",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context).colorScheme.onBackground,
-                                        fontWeight: FontWeight.w400
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        " ${expenses[i].amount}.00 Birr",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).colorScheme.onBackground,
+                                          fontWeight: FontWeight.w400
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      DateFormat('dd/MM/yyyy').format(expenses[i].date),
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context).colorScheme.outline,
-                                        fontWeight: FontWeight.w400
+                                      Text(
+                                        DateFormat('dd/MM/yyyy').format(expenses[i].date),
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).colorScheme.outline,
+                                          fontWeight: FontWeight.w400
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -171,8 +171,9 @@ class _AddExpenseState extends State<AddExpense> {
                                         actions: [
                                           TextButton(
                                             onPressed: () {
+                                                 context.read<DeleteCatagoryBloc>().add(DeleteCatagory(state.categories[i]));
+                                             
 
-                                              context.read<DeleteCatagoryBloc>().add(DeleteCatagory(state.categories[i]));
                                               Navigator.pop(ctx);
                                                 
                                               

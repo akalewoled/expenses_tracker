@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expenses_tracker/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
-import 'package:expenses_tracker/screens/add_expense/blocs/delete_catagory/delete_catagory_bloc.dart';
 import 'package:expenses_tracker/screens/add_expense/blocs/get_categories_bloc/get_categories_bloc.dart';
 import 'package:expenses_tracker/screens/add_expense/views/add_expense.dart';
 import 'package:expenses_tracker/screens/home/blocs/get_expenses_bloc/get_expenses_bloc.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../add_expense/blocs/create_expense_bloc/create_expense_bloc.dart';
+import '../../add_expense/blocs/delete_catagoty/delete_catagory_bloc.dart';
 import '../../stats/stats.dart';
 
 class HomeScreen extends StatefulWidget {
