@@ -168,5 +168,12 @@ class Transactions StatelessWidget {
     );
   }
   
-  List<BarChartGroupData> makeGroupData(int i, int j) {}
+  BarChartGroupData makeGroupData(int x, double y) {
+    return BarChartGroupData(
+      x: x, 
+      barRods: [
+        BarChartRodData(toY: y)
+      ]
+    );
+  }
 }
