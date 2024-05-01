@@ -10,7 +10,7 @@
        <h3> Meron gebresilassie – bdu1311637</h3>
         <h3>Fikiremariyam babu – bdu1311608</h3>
         <h3>Esubalew kunta – bdu1307727</h3>
- <div class="image-row" style="overflow: hidden;">
+ <div class="image-row" style="display: flex;">
   <img src="https://github.com/akalewoled/expenses_tracker/blob/main/addexpense.png" alt="Image 1" style="float: left;
   margin-right: 10px;">
   <img src="https://github.com/akalewoled/expenses_tracker/blob/main/addexpense2.png" alt="Image 2" style="float: left;
