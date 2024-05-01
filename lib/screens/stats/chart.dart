@@ -66,7 +66,7 @@ class _MyChartState extends State<MyChart> {
   });
 
   BarChartData mainBarData() {
-    return BarChartData(
+    return BarChartData( 
       titlesData: FlTitlesData(
         show: true,
         rightTitles: const AxisTitles(

@@ -40,6 +40,7 @@ class _AddExpenseState extends State<AddExpense> {
     return BlocListener<CreateExpenseBloc, CreateExpenseState>(// the first  state provider using it as litiner  listner
       listener: (context, state) {
         if(state is CreateExpenseSuccess) {
+           isLoading = true;
           Navigator.pop(context, expense);// go back to add expense  screen if we have set the state to 
         } else if(state is CreateExpenseLoading) {
           setState(() {

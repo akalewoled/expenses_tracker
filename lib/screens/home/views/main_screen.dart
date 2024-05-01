@@ -159,7 +159,7 @@ class MainScreen extends StatelessWidget {
                                           fontSize: 40,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold
-                                        ),
+                                        ),  
                                       );
                                     } else {
                                       return Text(
