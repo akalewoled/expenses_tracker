@@ -115,4 +115,32 @@ class Transactionsends StatelessWidget {
       child: text,
     );
   }
+
+
+   Widget leftTitles(double value, TitleMeta meta) {
+    const style = TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.bold,
+      fontSize: 14,
+    );
+    String text;
+    if (value == 0) {
+      text = '1K';
+    } else if (value == 2) {
+      text = '2K';
+    } else if (value == 3) {
+      text = '3K';
+    } else if (value == 4) {
+      text = '4K';
+    } else if (value == 5) {
+      text = '5K';
+    } else {
+      return Container();
+    }
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 0,
+      child: Text(text, style: style),
+    );
+  }
 }
