@@ -37,5 +37,37 @@ class Transactionsends StatelessWidget {
       ),
     );
   }
-}
 
+
+BarChartData mainBarData() {
+  return BarChartData(
+    titlesData: FlTitlesData(
+      show: true,
+      rightTitles: const AxisTitles(
+        sideTitles: SideTitles(showTitles: false)
+      ),
+      topTitles: const AxisTitles(
+        sideTitles: SideTitles(showTitles: false)
+      ),
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 38,
+          getTitlesWidget: getTiles,
+        )
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 38,
+          getTitlesWidget: leftTitles,
+        ),
+      ),
+    ),
+    borderData: FlBorderData(
+      show: false
+    ),
+    gridData: const FlGridData(show: false),
+    barGroups: showingGroups(),
+  );
+}
