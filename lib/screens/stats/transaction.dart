@@ -1,9 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'chart.dart';
 
-class Transactionsends StatelessWidget {
+class Transactions StatelessWidget {
+  const Transactions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,30 @@ class Transactionsends StatelessWidget {
       ),
     );
   }
+
+
+  List<BarChartGroupData> showingGroups() => List.generate(8, (i) {
+    switch (i) {
+      case 0:
+        return makeGroupData(0, 2);
+      case 1:
+        return makeGroupData(1, 3);
+      case 2:
+        return makeGroupData(2, 2);
+      case 3:
+        return makeGroupData(3, 4.5);
+      case 4:
+        return makeGroupData(4, 3.8);
+      case 5:
+        return makeGroupData(5, 1.5);
+      case 6:
+        return makeGroupData(6, 4);
+      case 7:
+        return makeGroupData(7, 3.8);
+      default:
+        return throw Error();
+    }
+  });
 
   BarChartData mainBarData() {
     return BarChartData(
@@ -143,4 +167,6 @@ class Transactionsends StatelessWidget {
       child: Text(text, style: style),
     );
   }
+  
+  List<BarChartGroupData> makeGroupData(int i, int j) {}
 }
