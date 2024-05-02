@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 
-class Transactions StatelessWidget {
+class Transactions extends StatelessWidget {
   const Transactions({super.key});
 
   @override
@@ -25,7 +25,7 @@ class Transactions StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12)
               ),
-              child: const Padding(
+              child:  Padding(
                 padding: EdgeInsets.fromLTRB(12, 20, 12, 12),
                 child: BarChart(
                   BarChartData(),

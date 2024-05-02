@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:expenses_tracker/app.dart';
+import 'package:expenses_tracker/onBoardingScreen/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'simple_bloc_observer.dart';
@@ -35,9 +36,13 @@ class MyApp1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      initialRoute: '/', // Set the initial route to your onboarding screen
+      routes: {
+        '/': (context) =>  OnBoardingScreen(), // Define route for onboarding screen
+        '/login': (context) => AuthPage(), // Define route for login/signup page
+      },
     );
   }
 }
