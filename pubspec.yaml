@@ -17,6 +17,7 @@ dependencies:
   uuid: ^4.3.3
 
   firebase_core: ^2.16.0
+  firebase_auth: ^4.19.4
 
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3

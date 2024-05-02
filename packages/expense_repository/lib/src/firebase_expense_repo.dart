@@ -5,6 +5,7 @@ import 'package:expense_repository/expense_repository.dart';
 class FirebaseExpenseRepo implements ExpenseRepository {
   final categoryCollection = FirebaseFirestore.instance.collection('categories');
 	final expenseCollection = FirebaseFirestore.instance.collection('expenses');
+  final usercollection= FirebaseFirestore.instance.collection('users');
 
 
   @override
@@ -80,6 +81,21 @@ Future<void> deleteCategory(Category category) async {
       log(e.toString());
       rethrow;
     }
+  }
+  @override
+  Future<users> getusers( ) async{
+    try{
+      return await usercollection.doc('D0FuFW9TExYc58r53dlr').get().then((userDoc) => users.fromEntity(userEntity.fromDocument({
+        'username': userDoc['username'],
+      
+      })));
+    }
+    catch (e){
+      log(e.toString());
+      rethrow;
+
+    }
+
   }
 
 }

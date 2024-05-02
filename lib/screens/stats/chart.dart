@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MyChart extends StatefulWidget {
   const MyChart({super.key});
@@ -12,10 +14,15 @@ class MyChart extends StatefulWidget {
 class _MyChartState extends State<MyChart> {
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      mainBarData(),
-    );
-  }
+  return SafeArea(
+    
+      child: BarChart(
+                    mainBarData(),
+                  ),
+                );
+             
+    
+}
 
   BarChartGroupData makeGroupData(int x, double y) {
     return BarChartGroupData(
@@ -168,4 +175,6 @@ class _MyChartState extends State<MyChart> {
       child: Text(text, style: style),
     );
   }
+  
+  column(List<BarChart> list) {}
 }

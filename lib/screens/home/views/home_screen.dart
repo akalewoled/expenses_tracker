@@ -16,6 +16,7 @@ import '../../stats/stats.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             body: index == 0 
               ? MainScreen(state.expenses) 
-              : const StatScreen());
+              :  StatScreen(state.expenses));
         } else {
           return const Scaffold(
             body: Center(

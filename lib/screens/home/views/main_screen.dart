@@ -2,6 +2,7 @@
 
 //import 'dart:js';
 import 'dart:math';
+import 'package:expense_repository/expense_repository.dart';
 
 import 'package:expense_repository/expense_repository.dart';
 import 'package:expenses_tracker/screens/add_expense/blocs/balance/balance_bloc.dart';
@@ -16,7 +17,10 @@ import 'package:intl/intl.dart';
 
 import '../../../data/data.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class MainScreen extends StatelessWidget {
+  
       final List<Expense> expenses;
   
       TextEditingController balanceController = TextEditingController();
@@ -33,23 +37,19 @@ class MainScreen extends StatelessWidget {
             return sum;
             
             }
-      
+            void signUserOut() {
+      FirebaseAuth.instance.signOut();
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider<TextBloc>(
-        
-        
-                    create: (context) => TextBloc(context),
-                          
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
-          child: Column(
-            children: [
-             
-             // profile 
-              Row(
+  Widget loaderBar(){
+    return const SizedBox(
+      child:  Text('loading...'),
+    );
+  }
+
+  Widget profileCard(context){
+     FirebaseExpenseRepo expenseRepository = FirebaseExpenseRepo();
+    return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -83,23 +83,45 @@ class MainScreen extends StatelessWidget {
                               color: Theme.of(context).colorScheme.outline
                             ),
                           ),
-                          Text(
-                            "fikiremariyam ",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onBackground
-                            ),
-                          )
+                          FutureBuilder(future:expenseRepository.getusers() , builder: (context, snapshot){
+                            if(snapshot.connectionState == ConnectionState.waiting && snapshot.connectionState != ConnectionState.done){
+                              return loaderBar();
+                            } else if(snapshot.hasError) {
+                              print('\n\n\n\n error from user dac: ${snapshot.error}  \n\n\n\n');
+                              return const Text('mr. x');
+                            } else if(snapshot.hasData) {
+                              return Text(snapshot.requireData.username);
+                            }
+                            return const Center();
+                          },)
                         ],
                       ),
                     ],
                   ),
                   IconButton(onPressed: () {
-                    int sum1 =caclulate();
-                  }, icon: const Icon(CupertinoIcons.settings))
+                    signUserOut();
+                  }, 
+                  icon: const Icon(Icons.logout))
                 ],
-              ),
+              );
+  }
+      
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: BlocProvider<TextBloc>(
+        
+        
+                    create: (context) => TextBloc(context),
+                          
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+          child: Column(
+            children: [
+             
+             // profile 
+              profileCard(context),
               const SizedBox(height: 20,),
               Container(
                 
@@ -162,8 +184,8 @@ class MainScreen extends StatelessWidget {
                                         ),  
                                       );
                                     } else {
-                                      return Text(
-                                        "1234",
+                                      return const Text(
+                                        "...loading",
                                         style: TextStyle(
                                           fontSize: 40,
                                           color: Colors.white,
@@ -269,8 +291,6 @@ class MainScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Stack(
-                                  
-                              
                                         alignment: Alignment.center,
                                         children: [
                                           Container(

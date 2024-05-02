@@ -3,6 +3,7 @@ import 'package:expenses_tracker/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'simple_bloc_observer.dart';
+import 'package:expenses_tracker/pages/auth_page.dart';
 
 void main() async {
   
@@ -23,9 +24,21 @@ void main() async {
     );
   Bloc.observer = SimpleBlocObserver();
   print('Firebase connected successfully!');
-  runApp(const MyApp());
+  runApp(const MyApp1());
     } catch (e) {
     print('Firebase connection error: $e');
+  }
+}
+
+class MyApp1 extends StatelessWidget {
+  const MyApp1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AuthPage(),
+    );
   }
 }
 
